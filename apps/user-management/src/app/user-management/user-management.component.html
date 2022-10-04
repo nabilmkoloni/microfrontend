@@ -1,0 +1,140 @@
+<taxpayer-p-card>
+    <div class="row">
+          <div class="col-md-8 w-100" >
+            <div *ngxPermissionsOnly="['create_user']">
+              <div class="title" >
+                <mat-card-title>Users</mat-card-title>
+                <mat-card-subtitle>List of users</mat-card-subtitle>
+                <button (click)="onCreate()"   mat-raised-button color="primary" style="background-color: #5f4c4ce3;outline:none"  title="{{'addNewUser'|translate}"> <mat-icon>add</mat-icon>Add New User</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+                <div class="mt-5" >
+                  <mat-form-field style="float: right;">
+                    <mat-label>Search</mat-label>
+                    <input matInput placeholder="Search" (keyup)="applyFilter($event)">
+                      
+                  </mat-form-field>
+               </div>
+          </div>
+    </div>
+
+    <hr>
+  
+  <div class="mat-elevation-z8 " >
+    
+    <mat-progress-bar *ngIf="loading" mode="indeterminate" value="40"></mat-progress-bar>
+    <div class="table-responsive">
+      <table  mat-table class="full-width-table w-100 table-styles" matSort aria-label="Elements">
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <th style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>SN</th>
+          <td mat-cell *matCellDef="let row; let i =index">{{i +1 }}</td>
+        </ng-container>
+        
+         <!-- Name Column -->
+        <ng-container matColumnDef="fname">
+            <th  style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>FirstName</th>
+            <td mat-cell *matCellDef="let row">{{row.firstName}}</td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="lname">
+          <th  style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>LastName</th>
+          <td mat-cell *matCellDef="let row">{{row.lastName}}</td>
+        </ng-container>
+
+         <!-- Name Column -->
+         <ng-container matColumnDef="username">
+          <th style="background-color:whitesmoke;border-radius:5px;"mat-header-cell *matHeaderCellDef mat-sort-header>UserName</th>
+          <td mat-cell *matCellDef="let row">{{row.userName}}</td>
+        </ng-container>
+        
+         <!-- Name Column -->
+         <ng-container matColumnDef="address">
+          <th style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+          <td mat-cell *matCellDef="let row">{{row.address}}</td>
+         </ng-container>
+
+              <!-- Name Column -->
+         <ng-container matColumnDef="email">
+          <th style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+          <td mat-cell *matCellDef="let row">{{row.email}}</td>
+         </ng-container>
+
+            <!-- Name Column -->
+         <ng-container matColumnDef="mobile">
+            <th style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</th>
+            <td mat-cell *matCellDef="let row">{{row.mobileNumber}}</td>
+         </ng-container>  
+
+          <ng-container matColumnDef="role">
+            <th style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+            <td mat-cell *matCellDef="let row">{{row.userType}}</td>
+          </ng-container>  
+
+          <ng-container matColumnDef="activityNo">
+            <th style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>Activity No</th>
+            <td mat-cell *matCellDef="let row">{{row.activityNumber}}</td>
+          </ng-container>  
+
+          <ng-container matColumnDef="date">
+            <th style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+            <td mat-cell *matCellDef="let row">{{row.dateCreated|date}}</td>
+          </ng-container>
+
+
+
+       
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="actions">
+          <th style="background-color:whitesmoke;border-radius:5px;" mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+          <td mat-cell *matCellDef="let row">
+           
+              <section>
+               
+                <div class="example-button-row">
+                  <div class="example-flex-container">
+                    <div class="example-button-container">
+                    
+                  
+                      <button class="ml-2" *ngIf="row.isActive;else elseblock" (click)="deactivate(row.id)"  mat-mini-fab style="background-color:green;" color="accent" aria-label="Example icon button with a delete icon">
+                        <mat-icon style="color:white">lock_open</mat-icon>
+                      </button>
+
+
+                      <ng-template #elseblock>
+                        <button  *ngxPermissionsOnly="['create_user']" (click)="activate(row.id)"  mat-mini-fab color="warn" aria-label="Example icon button with a delete icon">
+                          <mat-icon style="color:white">lock</mat-icon>
+                        </button>
+                      </ng-template>
+                      <button   class="ml-2"*ngxPermissionsOnly="['create_user']" (click)="onPermissions(row.id,row.permissions)"  mat-mini-fab style="background-color: #956567;" color="warn" aria-label="Example icon button with a delete icon">
+                        <mat-icon style="color:white">how_to_reg</mat-icon>
+                      </button>
+                      <button (click)="onEdit(row.id)" class="ml-2" *ngxPermissionsOnly="['create_user']" mat-mini-fab style="background-color: orange;" color="accent" aria-label="Example icon button with a delete icon">
+                        <mat-icon style="color:white">edit</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+              </section>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator #paginator
+          [length]="dataSource?.data?.length"
+          [pageIndex]="0"
+          [pageSize]="7"
+          [pageSizeOptions]="[10,25, 50, 100, 250]">
+      </mat-paginator>
+    </div>
+    </div>
+</taxpayer-p-card>

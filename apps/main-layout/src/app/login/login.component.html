@@ -1,0 +1,23 @@
+<body class="bg" style="background-color:#e0d1d2;"  (window:resize)="onResize($event)">
+    <div class="box" id="loginBox" style="background-color: #5f4c4ce3;">
+      <div *ngIf="loading" class="spinner"></div>
+      <!-- <span id="test"></span> -->
+      <div id="hideDiv">
+          <mat-icon style="font-size:30px;float:left">error</mat-icon><span id="error">Wrong username or password</span>
+      </div>
+      <img src="{{image}}" alt="" id="img" class="img mt-5"/>
+      <form [formGroup]="loginForm" >
+        <input (input)="onUsername($event)" id="username" required class="inp mt-2"  formControlName="username" type="text" placeholder="User name">
+        <input (input)="onPassword($event)" id="password" required class="inp mt-3" formControlName="password" type="password" placeholder="Password">
+        <div class="row">
+              <div class="col-md-12 mt-4">
+                <a class="reset" (click)="resetPassword()" style="color:white;">Forgot password</a>
+              </div>
+        </div>
+        <hr style="border-color: rgba(0,0,0,0)">
+        <button id="btnLogin" (click)="onClick()" [disabled]="loginForm.invalid" mat-raised-button class="btnZrb" style="background-color:#956567;" color="primary">
+          Log In
+        </button>
+      </form>
+    </div>
+  </body>

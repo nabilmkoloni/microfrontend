@@ -1,0 +1,56 @@
+<taxpayer-p-header (toogleSideBar)="sideBarToogler()"></taxpayer-p-header>
+<mat-sidenav-container>
+  <mat-sidenav #drawer id="sidenav" mode="side"  [opened]="isExpanded">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/Taxpayer"><mat-icon>dashboard</mat-icon>&nbsp;DASHBOARD</a>
+      <a mat-list-item routerLink="/userManagement"><mat-icon>person</mat-icon>&nbsp;USER MANAGEMENT</a>
+      <a mat-list-item href="#"><mat-icon>attach_money</mat-icon>&nbsp;WITHOLD TAX</a>
+      <mat-expansion-panel class="mat-elevation-z0" (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+      <mat-expansion-panel-header style="width: 240px; margin-left:-10px;">
+          <mat-icon>receipt</mat-icon>&nbsp; RETURNS
+      </mat-expansion-panel-header>
+      <mat-nav-list style="width: 240px; margin-left:-10px;">
+        <a class="mt-2" mat-list-item routerLink="/stamp">
+          <mat-icon>receipt</mat-icon>&nbsp; Stamp Duty
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel class="mat-elevation-z0" (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+    <mat-expansion-panel-header style="width: 240px; margin-left:-10px;">
+        <mat-icon>receipt</mat-icon>&nbsp; REPORTS
+    </mat-expansion-panel-header>
+    <mat-nav-list style="width: 240px; margin-left:-10px;">
+      <a class="mt-2" mat-list-item routerLink="/salesReport">
+        <mat-icon>receipt</mat-icon>&nbsp; Sales Report
+      </a>
+      <a class="mt-2" mat-list-item routerLink="/witholdReport">
+        <mat-icon>receipt</mat-icon>&nbsp; Withold Report
+      </a>
+      <a class="mt-2" mat-list-item routerLink="/accommodationReport">
+        <mat-icon>receipt</mat-icon>&nbsp; Accommodation Report
+      </a>
+      <a class="mt-2" mat-list-item routerLink="/checkoutReport">
+        <mat-icon>receipt</mat-icon>&nbsp; CheckOut Report
+      </a>
+      <a class="mt-2" mat-list-item routerLink="/expectedCheckoutReport">
+        <mat-icon>receipt</mat-icon>&nbsp; Expected CheckOut Guest Report
+      </a>
+      <a class="mt-2" mat-list-item routerLink="/summaryReport">
+        <mat-icon>receipt</mat-icon>&nbsp; Summary Report
+      </a>
+      <a class="mt-2" mat-list-item routerLink="/purchaseReport">
+        <mat-icon>receipt</mat-icon>&nbsp; Purchases Report
+      </a>
+    </mat-nav-list>
+  </mat-expansion-panel>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content style="margin-top:-1%">
+    <!-- Add Content Here -->
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

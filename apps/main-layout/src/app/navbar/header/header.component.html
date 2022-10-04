@@ -1,0 +1,57 @@
+<mat-toolbar>
+    <button mat-icon-button >
+      <mat-icon>menu</mat-icon>
+    </button>
+    &nbsp;
+    <span >
+      <img class="images text-center my-element" [src]="image" alt="image">
+  
+    </span>
+  
+    <span class="spacer"></span>
+    <button matTooltip="Notification" mat-icon-button >
+      <mat-icon matBadge="0" matBadgeColor="warn">notifications</mat-icon>
+    </button>
+    &nbsp;
+      <a>
+        <button matTooltip="Change language" mat-icon-button >
+          <mat-icon>
+            language
+          </mat-icon>
+          &nbsp;
+          <!-- <span *ngIf="!deviceXs">{{'more' | translate}}</span> -->
+        </button>
+    
+      </a>
+      &nbsp; 
+    <span>test test</span> 
+    <a>
+      <button mat-icon-button matTooltip="More" >
+        <mat-icon>
+          more_vert
+        </mat-icon>
+        &nbsp;
+      </button>
+
+      <mat-menu >
+        <mat-nav-list>
+          <a mat-list-item routerLink="">
+            <span class="material-icons">
+              person
+            </span>
+            &nbsp; &nbsp;
+            <span>Profile</span>
+          </a>
+          <a mat-list-item (click)="onLogout()" routerLink="">
+            <span class="material-icons">
+              logout
+            </span>
+            &nbsp; &nbsp;
+            <span>Logout</span>
+          </a>
+        </mat-nav-list>
+      </mat-menu>
+
+    </a> 
+  </mat-toolbar>
+

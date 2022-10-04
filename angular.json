@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "dashboard": "apps/dashboard",
+    "dashboard-e2e": "apps/dashboard-e2e",
+    "main-layout": "apps/main-layout",
+    "main-layout-e2e": "apps/main-layout-e2e",
+    "user-management": "apps/user-management",
+    "user-management-e2e": "apps/user-management-e2e"
+  }
+}

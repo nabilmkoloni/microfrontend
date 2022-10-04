@@ -1,0 +1,18 @@
+.mat-toolbar{
+    background-color: #5f4c4ce3;
+    /* background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); */
+    color: white;
+    width: 100%;
+  }
+  .spacer{
+    flex: 1 1 auto;
+  }
+  .element {
+  
+    animation: rollIn;
+    animation-duration: 3s;
+  }
+  .images {
+    width: 170px;
+    height: 60px;
+  }

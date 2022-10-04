@@ -1,0 +1,73 @@
+{
+        "dashboard": {
+                "remoteEntry":"http://localhost:4201/remoteEntry.js",
+                "exposedModule": "./Module",
+                "displayName": "dashboard",
+                "routePath": "",
+                "ngModuleName": "DashboardModule"
+        },
+        "accommodation": {
+                "remoteEntry":"http://localhost:4202/remoteEntry.js"
+        },
+        "hotelDash": {
+                "remoteEntry":"http://localhost:4203/remoteEntry.js"
+        },
+        "otherDash": {
+                "remoteEntry":"http://localhost:4204/remoteEntry.js"
+        },
+        "restaDash": {
+                "remoteEntry":"http://localhost:4205/remoteEntry.js"
+        },
+        "generalDash": {
+                "remoteEntry":"http://localhost:4206/remoteEntry.js"
+        },
+        "salesReport": {
+                "remoteEntry":"http://localhost:4207/remoteEntry.js",
+                "exposedModule": "./Module",
+                "displayName": "salesReport",
+                "routePath": "salesReport",
+                "ngModuleName": "ReportModule"
+        },
+        "witholdReport": {
+                "remoteEntry":"http://localhost:4208/remoteEntry.js",
+                "exposedModule": "./Module",
+                "displayName": "witholdReport",
+                "routePath": "witholdReport",
+                "ngModuleName": "WreportModule"
+        },
+        "accommodationReport": {
+                "remoteEntry":"http://localhost:4209/remoteEntry.js",
+                "exposedModule": "./Module",
+                "displayName": "accommodationReport",
+                "routePath": "accommodationReport",
+                "ngModuleName": "AreportModule"
+        },
+        "checkoutReport": {
+                "remoteEntry":"http://localhost:4210/remoteEntry.js",
+                "exposedModule": "./Module",
+                "displayName": "checkoutReport",
+                "routePath": "checkoutReport",
+                "ngModuleName": "CreportModule"
+        },
+        "expectedCheckoutReport": {
+                "remoteEntry":"http://localhost:4211/remoteEntry.js",
+                "exposedModule": "./Module",
+                "displayName": "expectedCheckoutReport",
+                "routePath": "expectedCheckoutReport",
+                "ngModuleName": "EreportModule"
+        },
+        "summaryReport": {
+                "remoteEntry":"http://localhost:4212/remoteEntry.js",
+                "exposedModule": "./Module",
+                "displayName": "summaryReport",
+                "routePath": "summaryReport",
+                "ngModuleName": "SreportModule"
+        },
+        "purchaseReport": {
+                "remoteEntry":"http://localhost:4213/remoteEntry.js",
+                "exposedModule": "./Module",
+                "displayName": "purchaseReport",
+                "routePath": "purchaseReport",
+                "ngModuleName": "PreportModule"
+        }
+}

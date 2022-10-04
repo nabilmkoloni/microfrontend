@@ -1,0 +1,225 @@
+<taxpayer-p-dash-card *ngxPermissionsOnly="['homepage']">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box w-75">
+        <div class="number">ZRB</div>
+        <h1>WELCOME {{username}}</h1>
+        <p>
+          Zanzibar Ya Uchumi Wa Buluu itajengwa Kwa Tunu na Shauku Ya Kulipa Na Kukusanya Kodi, Tushirikiane Katika
+          Kufikia Azma Ya Uchumi Wa Buluu.
+          <br> Tulipe Kodi Kwa Maendeleo Ya Zanzibar
+        </p>
+      </div>
+    </div>
+  </div>
+  </taxpayer-p-dash-card>
+  
+  <taxpayer-p-dash-card *ngxPermissionsOnly="['view_dashboard']" title="VFMS Dashboard"
+    subtitle="Taxpayer Dashboard Summary">
+    <mat-form-field appearance="outline" style="float: left;">
+      <mat-label>Select Currency</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let hotelFormat of HotelCurrencyFormat" [value]="hotelFormat"
+          (click)="changeValue(hotelFormat)">
+          {{HotelCurrencyFormatMapping[hotelFormat]}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="loadingDaily" class="letter-holder">
+      <div class="load-6">
+        <div class="load-wrapp">
+          <div class="l-1 letter">L</div>
+          <div class="l-2 letter">o</div>
+          <div class="l-3 letter">a</div>
+          <div class="l-4 letter">d</div>
+          <div class="l-5 letter">i</div>
+          <div class="l-6 letter">n</div>
+          <div class="l-7 letter">g</div>
+          <div class="l-8 letter">.</div>
+          <div class="l-9 letter">.</div>
+          <div class="l-10 letter">.</div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid mt-4" (window:resize)="onResize($event)">
+      <div class="row">
+        <div class="fa">
+          Daily Sales:<span class="username"> {{selectedValue}} {{TOTAL_SALES|number}}</span>
+        </div>
+        <div class="fa">
+          Daily Tax:<span class="username"> {{selectedValue}} {{TOTAL_TAX|number}}</span>
+        </div>
+      </div>
+      <swiper [slidesPerView]="swiperView" [spaceBetween]="30" [pagination]="{
+        clickable: true
+      }" #swiper [navigation]="true">
+        <ng-template *ngFor="let item of dashData let i = index" swiperSlide>
+          <div class="row p-2">
+  
+            <div class="col-md-12">
+  
+              <mat-card class="d-flex justify-content-between number-card py-4" *ngxPermissionsOnly="['view_dashboard']">
+  
+  
+                <div class="row w-100 p-3" style="background-color:beige;border-radius:6px;">
+  
+                  <div class="row w-100" style="border-bottom: 1px solid #d8d874;">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                      <h2 style="font-family:sans-serif;font-weight: bold;">{{item.name?.toUpperCase()}}</h2>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div>
+                      <mat-card-title>
+                        <h3><span style="font-size:20px;font-weight: bold;">Street</span> :
+                          {{item.street}}</h3>
+                        <h3><span style="font-size:20px;font-weight: bold;">Tax Type</span> :
+                          {{convert(item.type)}}</h3>
+                        <h3 style="font-weight: bold;"><span style="font-size:20px;font-weight: bold;">Today Tax</span> : {{item.taxAmount|currency:item.currency+' '}}</h3>
+                      </mat-card-title>
+  
+                    </div>
+                  </div>
+  
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+  
+                    <div class="row">
+                      <div class="col-md-6  col-sm-12 col-xs-12 ">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <h3>Today Sales</h3>
+                          </div>
+                          <div class="col-md-12">
+                            <h2 class="mt-5col-sm-12 col-xs-12 font-weight-bold">{{item.amount|currency:item.currency+'
+                              '}}</h2>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="col-md-6 col-sm-12 col-xs-12 ">
+                        <div class="mat-card-icon">
+                          <img class="img-icon" src="assets/icons/black-24dp/2x/outline_point_of_sale_black_24dp.png"
+                            alt="">
+                        </div>
+                      </div>
+  
+                    </div>
+                  </div>
+  
+                  <div class="row w-100" style="border-top: 1px solid #d8d874;">
+                    <div class="col-md-12 justify-content-center mt-2">
+                      <button class="button text-center" *ngxPermissionsOnly="['navigate_dashboard']"
+                        (click)="onEnter(item.id,item.type,item.name,item.category,item.parentId,item.street)"
+                        style="color: white;font-weight:bold;font-size:14px;width:200px;">Enter Business Unit</button>
+                    </div>
+                  </div>
+                </div>
+  
+              </mat-card>
+            </div>
+          </div>
+  
+        </ng-template>
+  
+      </swiper>
+      <button mat-raised-button style="float: right;color:white;background-color: #5f4c4ce3;" (click)="slideNext()"><span
+          class="material-icons-outlined">
+          Next
+        </span></button>
+      <button mat-raised-button style="color:white;background-color: #5f4c4ce3;" (click)="slidePrev()"><span
+          class="material-icons-outlined">
+          Prev
+        </span></button>
+      <div class="my-5"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- revenue chart -->
+          <div *ngIf="loadingMonthly" class="letter-holder">
+            <div class="load-6">
+              <div class="load-wrapp">
+                <div class="l-1 letter">L</div>
+                <div class="l-2 letter">o</div>
+                <div class="l-3 letter">a</div>
+                <div class="l-4 letter">d</div>
+                <div class="l-5 letter">i</div>
+                <div class="l-6 letter">n</div>
+                <div class="l-7 letter">g</div>
+                <div class="l-8 letter">.</div>
+                <div class="l-9 letter">.</div>
+                <div class="l-10 letter">.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="fa">
+              Monthly Sales:<span class="username"> {{selectedValue}} {{TOTAL_MONTHLY_SALES|number}}</span>
+            </div>
+          </div>
+          <taxpayer-p-dash-card *ngxPermissionsOnly="['view_dashboard']" title="Sales Chart"
+            subtitle="Revenue Chart Monthly">
+  
+            <div style="height:400px;" id="chartdiv" class="amcharts-chart-div"></div>
+          </taxpayer-p-dash-card>
+        </div>
+  
+        <div class="col-md-6">
+          <div *ngIf="loadingYearly" class="letter-holder">
+            <div class="load-6">
+              <div class="load-wrapp">
+                <div class="l-1 letter">L</div>
+                <div class="l-2 letter">o</div>
+                <div class="l-3 letter">a</div>
+                <div class="l-4 letter">d</div>
+                <div class="l-5 letter">i</div>
+                <div class="l-6 letter">n</div>
+                <div class="l-7 letter">g</div>
+                <div class="l-8 letter">.</div>
+                <div class="l-9 letter">.</div>
+                <div class="l-10 letter">.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="fa">
+              Yearly Sales:<span class="username"> {{selectedValue}} {{TOTAL_YEARLY_SALES|number}}</span>
+            </div>
+          </div>
+          <taxpayer-p-dash-card title="Yearly Sales Chart" subtitle="Revenue Chart Yearly {{yyyy}}">
+            <div style="height:400px;width:100%;" id="chartdivYearly" class="amcharts-chart-div"></div>
+          </taxpayer-p-dash-card>
+        </div>
+      </div>
+  
+      <div class="my-5"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div *ngIf="loadingSalesToDate" class="letter-holder">
+            <div class="load-6">
+              <div class="load-wrapp">
+                <div class="l-1 letter">L</div>
+                <div class="l-2 letter">o</div>
+                <div class="l-3 letter">a</div>
+                <div class="l-4 letter">d</div>
+                <div class="l-5 letter">i</div>
+                <div class="l-6 letter">n</div>
+                <div class="l-7 letter">g</div>
+                <div class="l-8 letter">.</div>
+                <div class="l-9 letter">.</div>
+                <div class="l-10 letter">.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="fa">
+              Sales To Date:<span class="username"> {{selectedValue}} {{SALES_TO_DATE|number}}</span>
+            </div>
+          </div>
+          <taxpayer-p-dash-card *ngxPermissionsOnly="['view_dashboard']" title="Sales To Date Chart"
+            subtitle="Begin To Now">
+            <div style="height:400px;width:100%;" id="salesToDate" class="amcharts-chart-div"></div>
+          </taxpayer-p-dash-card>
+        </div>
+      </div>
+    </div>
+  </taxpayer-p-dash-card>
